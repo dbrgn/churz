@@ -6,7 +6,6 @@ import shelve
 from bottle import get, post, run, redirect, request, abort
 
 
-base_url = 'http://s.dbrgn.ch/'
 db = shelve.open('data.db')
 
 
@@ -32,7 +31,7 @@ def store():
         if not rand_string in db:
             db[rand_string] = url
             break
-    return base_url + rand_string
+    return request.url + rand_string
 
 
 def sigint(signal, frame):
@@ -42,4 +41,4 @@ def sigint(signal, frame):
 signal.signal(signal.SIGINT, sigint)
 
 
-run(host='localhost', port=8080)
+run(host='localhost', port=9393)

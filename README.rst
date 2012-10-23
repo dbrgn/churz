@@ -2,7 +2,7 @@
 Churz – Yet another simple URL shortener
 ########################################
 
-*Churz* is yet another simple URL shortener in 33 SLOC.
+*Churz* is yet another simple URL shortener in 32 SLOC.
 
 It's written in Python using `Bottle`_ and `Shelve`_.
 
@@ -23,7 +23,7 @@ You can create new shortlinks by POSTing to ``/``. The URL to be shortened shoul
 be provided in a ``url`` field in your POST data. The response will return the
 short URL in the response body text. ::
 
-    curl --data "url=http://www.youtube.com/watch?v=J---aiyznGQ" http://localhost:8080/
+    curl --data "url=http://www.youtube.com/watch?v=J---aiyznGQ" http://localhost:9393/
 
 License
 =======
