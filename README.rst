@@ -21,7 +21,9 @@ Use
 
 You can create new shortlinks by POSTing to ``/``. The URL to be shortened should
 be provided in a ``url`` field in your POST data. The response will return the
-short URL in the response body text.
+short URL in the response body text. ::
+
+    curl --data "url=http://www.youtube.com/watch?v=J---aiyznGQ" http://localhost:8080/
 
 License
 =======
