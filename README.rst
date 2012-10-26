@@ -1,6 +1,11 @@
-########################################
 Churz – Yet another simple URL shortener
-########################################
+========================================
+
+
+.. image:: https://secure.travis-ci.org/gwrtheyrn/churz.png?branch=master
+    :alt: Build status
+    :target: http://travis-ci.org/gwrtheyrn/churz
+
 
 *Churz* is yet another simple URL shortener in 40 SLOC.
 
@@ -8,15 +13,17 @@ It's written in Python using `Bottle`_ and `Shelve`_.
 
 The name *Churz* is Swiss German for "short".
 
+
 Install
-=======
+-------
 
 ::
 
     $ pip install -r requirements.txt
 
+
 Run
-===
+---
 
 ::
 
@@ -29,8 +36,9 @@ Run
         -p PORT      Port number [default: 9393].
         -d DATABASE  Database file [default: data.db].
 
+
 Use
-===
+---
 
 You can create new shortlinks by POSTing to ``/``. The URL to be shortened should
 be provided in a ``url`` field in your POST data. The response will return the
@@ -38,8 +46,9 @@ short URL in the response body text. ::
 
     curl --data "url=http://www.youtube.com/watch?v=J---aiyznGQ" http://localhost:9393/
 
+
 License
-=======
+-------
 
 MIT License, see ``LICENSE`` file.
 
