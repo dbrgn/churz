@@ -2,19 +2,32 @@
 Churz – Yet another simple URL shortener
 ########################################
 
-*Churz* is yet another simple URL shortener in 32 SLOC.
+*Churz* is yet another simple URL shortener in 42 SLOC.
 
 It's written in Python using `Bottle`_ and `Shelve`_.
 
 The name *Churz* is Swiss German for "short".
+
+Install
+=======
+
+::
+
+    $ pip install -r requirements.txt
 
 Run
 ===
 
 ::
 
-    pip install -r requirements.txt
-    python churz.py
+    Usage:
+        churz.py [-p PORT] [-d DATABASE]
+        churz.py --help
+        churz.py --version
+
+    Options:
+        -p PORT      Port number [default: 9393].
+        -d DATABASE  Database file [default: data.db].
 
 Use
 ===

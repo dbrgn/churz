@@ -1,12 +1,22 @@
+"""Churz. Yet another simple URL shortener in 42 SLOC.
+
+Usage:
+    churz.py [-p PORT] [-d DATABASE]
+    churz.py --help
+    churz.py --version
+
+Options:
+    -p PORT      Port number [default: 9393].
+    -d DATABASE  Database file [default: data.db].
+
+"""
 import os
 import sys
 import signal
 import base64
 import shelve
 from bottle import get, post, run, redirect, request, abort
-
-
-db = shelve.open('data.db')
+from docopt import docopt
 
 
 @get('/')
@@ -41,4 +51,12 @@ def sigint(signal, frame):
 signal.signal(signal.SIGINT, sigint)
 
 
-run(host='localhost', port=9393)
+if __name__ == '__main__':
+    args = docopt(__doc__, version='Churz v0.1')
+    try:
+        port = int(args['-p'])
+    except ValueError:
+        raise ValueError('Invalid port number: %s.' % args['-p'])
+    global db
+    db = shelve.open(str(args['-d']))
+    run(host='localhost', port=port)
