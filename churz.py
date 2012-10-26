@@ -1,4 +1,4 @@
-"""Churz. Yet another simple URL shortener in 42 SLOC.
+"""Churz. Yet another simple URL shortener.
 
 Usage:
     churz.py [-p PORT] [-d DATABASE]
@@ -15,7 +15,7 @@ import sys
 import signal
 import base64
 import shelve
-from bottle import get, post, run, redirect, request, abort
+from bottle import get, post, run, redirect, request, abort, HTTPResponse
 from docopt import docopt
 
 
@@ -26,7 +26,7 @@ def retrieve(path=None):
     if path is None:
         return '<img src="http://i1.kym-cdn.com/photos/images/newsfeed/000/345/309/5eb.gif">'
     try:
-        redirect(db[path])
+        redirect(db[path], code=301)
     except KeyError as e:
         abort(404, 'URL %s not found.' % e.message)
 
@@ -41,11 +41,12 @@ def store():
         if not rand_string in db:
             db[rand_string] = url
             break
-    return request.url + rand_string
+    raise HTTPResponse(request.url + rand_string, 201)
 
 
 def sigint(signal, frame):
     """Handle SIGINT signal to properly close shelve."""
+    global db
     db.close()
     sys.exit()
 signal.signal(signal.SIGINT, sigint)

@@ -2,7 +2,7 @@
 Churz – Yet another simple URL shortener
 ########################################
 
-*Churz* is yet another simple URL shortener in 42 SLOC.
+*Churz* is yet another simple URL shortener in 40 SLOC.
 
 It's written in Python using `Bottle`_ and `Shelve`_.
 
