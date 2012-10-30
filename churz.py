@@ -28,7 +28,7 @@ def retrieve(path=None):
     try:
         redirect(db[path], code=301)
     except KeyError as e:
-        abort(404, 'URL %s not found.' % e.message)
+        abort(404, 'URL %s not found.' % e)
 
 
 @post('/')
