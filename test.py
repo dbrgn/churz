@@ -4,16 +4,23 @@ import subprocess
 import signal
 import time
 import requests
+import socket
 
 URL = 'http://localhost:9393/'
 
-def server():
-    """Server function that runs in background."""
+
+def get_free_port():
+    s = socket.socket()
+    s.bind(('', 0))
+    port = s.getsockname()[1]
+    s.close()
+    return port
+
 
 class IntegrationTests(unittest.TestCase):
 
     def setUp(self):
-        port = 39393
+        port = get_free_port()
         self.db = '%s.db' % time.time()
         print 'Starting test server...'
         self.server = subprocess.Popen('python churz.py -p %s -d %s' % (port, self.db), shell=True)
