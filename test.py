@@ -17,13 +17,14 @@ class IntegrationTests(unittest.TestCase):
         self.db = '%s.db' % time.time()
         print 'Starting test server...'
         self.server = subprocess.Popen('python churz.py -p %s -d %s' % (port, self.db), shell=True)
-        time.sleep(2)
-        #self.url = 'http://localhost:%u/' % port
-        self.url = 'http://localhost:9393/'
+        time.sleep(3)
+        self.url = 'http://localhost:%u/' % port
 
     def tearDown(self):
         print 'Stopping test server...'
         self.server.send_signal(signal.SIGINT)
+        time.sleep(1)
+        self.server.send_signal(signal.SIGKILL)
         self.server.wait()
         print 'Removing test database'
         os.remove(os.path.abspath(self.db))
