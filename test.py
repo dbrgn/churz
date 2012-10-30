@@ -5,6 +5,7 @@ import signal
 import time
 import requests
 import socket
+import errno
 
 URL = 'http://localhost:9393/'
 
@@ -34,7 +35,12 @@ class IntegrationTests(unittest.TestCase):
         self.server.send_signal(signal.SIGKILL)
         self.server.wait()
         print 'Removing test database'
-        os.remove(os.path.abspath(self.db))
+        try:
+            os.remove(os.path.abspath(self.db))
+        except OSError as e:
+            if e.errno != errno.ENOENT:
+                raise
+
 
     def testHome(self):
         r = requests.get(self.url)
