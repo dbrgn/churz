@@ -2,9 +2,9 @@ Churz – Yet another simple URL shortener
 ========================================
 
 
-.. image:: https://secure.travis-ci.org/gwrtheyrn/churz.png?branch=master
+.. image:: https://secure.travis-ci.org/dbrgn/churz.png?branch=master
     :alt: Build status
-    :target: http://travis-ci.org/gwrtheyrn/churz
+    :target: http://travis-ci.org/dbrgn/churz
 
 
 *Churz* is yet another simple URL shortener in 40 SLOC.
