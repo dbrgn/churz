@@ -41,7 +41,8 @@ def store():
         if not rand_string in db:
             db[rand_string] = url
             break
-    raise HTTPResponse(request.url + rand_string, 201)
+    text = '{url}{rand}\n'.format(url=request.url, rand=rand_string)
+    raise HTTPResponse(text, 201)
 
 
 def sigint(signal, frame):
