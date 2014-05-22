@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import print_function, division, absolute_import, unicode_literals
+
 import unittest
 import os
 import subprocess
@@ -23,18 +26,18 @@ class IntegrationTests(unittest.TestCase):
     def setUp(self):
         port = get_free_port()
         self.db = '%s.db' % time.time()
-        print 'Starting test server...'
+        print('Starting test server...')
         self.server = subprocess.Popen('python churz.py -p %s -d %s' % (port, self.db), shell=True)
         time.sleep(3)
         self.url = 'http://localhost:%u/' % port
 
     def tearDown(self):
-        print 'Stopping test server...'
+        print('Stopping test server...')
         self.server.send_signal(signal.SIGINT)
         time.sleep(1)
         self.server.send_signal(signal.SIGKILL)
         self.server.wait()
-        print 'Removing test database'
+        print('Removing test database')
         try:
             os.remove(os.path.abspath(self.db))
         except OSError as e:
