@@ -47,6 +47,21 @@ short URL in the response body text. ::
     curl --data "url=http://www.youtube.com/watch?v=J---aiyznGQ" http://localhost:9393/
 
 
+systemd
+-------
+
+There's a systemd unit file called ``churz.service`` that can be used to run and
+monitor churz as a system service. You can use it as follows:
+
+1. Adjust the path to the code and the virtualenv in the unit file
+2. Copy the unit file to ``/etc/systemd/system/``
+3. Run ``sudo systemctl start churz`` and ``sudo systemctl enable churz``
+
+If you think a parametrizable unit file (think ``churz@-var-www-churz.service``)
+would make sense, please open an issue on GitHub.
+
+
+
 License
 -------
 

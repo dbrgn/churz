@@ -1,0 +1,17 @@
+[Unit]
+Description=Simple URL Shortener
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/churz
+ExecStart=/var/www/churz/VIRTUAL/bin/python churz.py
+TimeoutStartSec=2
+TimeoutStopSec=5
+Restart=on-failure
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
