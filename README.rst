@@ -9,8 +9,7 @@ Churz – Yet another simple URL shortener
 
 *Churz* is yet another simple URL shortener in 40 SLOC.
 
-It's written in Python using `Bottle`_ and `Shelve`_. It supports both Python 2
-and 3.
+It's written in Python 2 using `Bottle`_ and `Shelve`_.
 
 The name *Churz* is Swiss German for "short".
 
