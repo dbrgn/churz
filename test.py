@@ -47,13 +47,13 @@ class IntegrationTests(unittest.TestCase):
 
     def testHome(self):
         r = requests.get(self.url)
-        self.assertTrue('<img' in r.content)
+        self.assertTrue('<img' in r.text)
 
     def testStoreNew(self):
         data = {'url': 'http://github.com/'}
         r1 = requests.post(self.url, data)
         self.assertEqual(201, r1.status_code)
-        url = r1.content
+        url = r1.text
         r2 = requests.get(url)
         self.assertEqual(301, r2.history[0].status_code)
         self.assertEqual('https://github.com/', r2.url)

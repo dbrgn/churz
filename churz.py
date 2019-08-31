@@ -1,5 +1,8 @@
 """Churz. Yet another simple URL shortener.
 
+Warning: Probably not thread safe, so multiple stores at the same time might
+get lost.
+
 Usage:
     churz.py [-p PORT] [-d DATABASE]
     churz.py --help
@@ -7,7 +10,7 @@ Usage:
 
 Options:
     -p PORT      Port number [default: 9393].
-    -d DATABASE  Database file [default: data.db].
+    -d DATABASE  Database file, will be created if missing [default: data.db].
 
 """
 import base64
@@ -37,9 +40,11 @@ def store():
     url = request.POST.get('url')
     while 1:
         rand_bytes = os.urandom(3)
-        rand_string = base64.urlsafe_b64encode(rand_bytes)
+        rand_string = base64.urlsafe_b64encode(rand_bytes).decode('ascii')
         if rand_string not in db:
             db[rand_string] = url
+            with open(db_filename, 'w') as f:
+                f.write(json.dumps(db, indent=2))
             break
     text = '{url}{rand}\n'.format(url=request.url, rand=rand_string)
     raise HTTPResponse(text, 201)
@@ -51,7 +56,11 @@ if __name__ == '__main__':
         port = int(args['-p'])
     except ValueError:
         raise ValueError('Invalid port number: %s.' % args['-p'])
-    global db
-    with open(args['-d'], 'r') as f:
-        db = json.load(f)
+    global db, db_filename
+    db_filename = args['-d']
+    try:
+        with open(db_filename, 'r') as f:
+            db = json.load(f)
+    except FileNotFoundError:
+        db = {}
     run(host='localhost', port=port)
