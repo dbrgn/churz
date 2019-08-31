@@ -10,19 +10,18 @@ Options:
     -d DATABASE  Database file [default: data.db].
 
 """
-import os
-import sys
-import signal
 import base64
-import shelve
 from bottle import get, post, run, redirect, request, abort, HTTPResponse
 from docopt import docopt
+import json
+import os
 
 
 @get('/')
-@get('/<path:re:[a-zA-Z0-9_\-]+>')
+@get('/<path:re:[a-zA-Z0-9_\\-]+>')
 def retrieve(path=None):
     """Redirect to real URL."""
+    global db
     if path is None:
         return '<img src="http://i1.kym-cdn.com/photos/images/newsfeed/000/345/309/5eb.gif">'
     try:
@@ -34,23 +33,16 @@ def retrieve(path=None):
 @post('/')
 def store():
     """Shorten new URL."""
+    global db
     url = request.POST.get('url')
     while 1:
         rand_bytes = os.urandom(3)
         rand_string = base64.urlsafe_b64encode(rand_bytes)
-        if not rand_string in db:
+        if rand_string not in db:
             db[rand_string] = url
             break
     text = '{url}{rand}\n'.format(url=request.url, rand=rand_string)
     raise HTTPResponse(text, 201)
-
-
-def sigint(signal, frame):
-    """Handle SIGINT signal to properly close shelve."""
-    global db
-    db.close()
-    sys.exit()
-signal.signal(signal.SIGINT, sigint)
 
 
 if __name__ == '__main__':
@@ -60,5 +52,6 @@ if __name__ == '__main__':
     except ValueError:
         raise ValueError('Invalid port number: %s.' % args['-p'])
     global db
-    db = shelve.open(str(args['-d']))
+    with open(args['-d'], 'r') as f:
+        db = json.load(f)
     run(host='localhost', port=port)
