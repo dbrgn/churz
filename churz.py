@@ -26,7 +26,7 @@ def retrieve(path=None):
     """Redirect to real URL."""
     global db
     if path is None:
-        return '<img src="http://i1.kym-cdn.com/photos/images/newsfeed/000/345/309/5eb.gif">'
+        return '<img src="https://i1.kym-cdn.com/photos/images/newsfeed/000/345/309/5eb.gif">'
     try:
         redirect(db[path], code=301)
     except KeyError as e:
