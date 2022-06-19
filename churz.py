@@ -39,6 +39,8 @@ def store():
     """Shorten new URL."""
     global db
     url = request.POST.get('url')
+    if not url:
+        raise HTTPResponse('No URL provided', 400)
     while 1:
         rand_bytes = os.urandom(3)
         rand_string = base64.urlsafe_b64encode(rand_bytes).decode('ascii')
