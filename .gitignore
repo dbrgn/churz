@@ -2,4 +2,5 @@
 *.db
 *.swp
 *.json
+venv*/
 VENV*/

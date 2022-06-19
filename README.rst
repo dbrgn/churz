@@ -2,11 +2,6 @@ Churz – Yet another simple URL shortener
 ========================================
 
 
-.. image:: https://secure.travis-ci.org/dbrgn/churz.png?branch=master
-    :alt: Build status
-    :target: http://travis-ci.org/dbrgn/churz
-
-
 *Churz* is yet another simple URL shortener in 40 SLOC.
 
 It's written in Python 3 using `Bottle`_. Data is stored in a JSON file.
@@ -59,7 +54,6 @@ monitor churz as a system service. You can use it as follows:
 
 If you think a parametrizable unit file (think ``churz@-var-www-churz.service``)
 would make sense, please open an issue on GitHub.
-
 
 
 License
