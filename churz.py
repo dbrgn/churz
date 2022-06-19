@@ -4,11 +4,12 @@ Warning: Probably not thread safe, so multiple stores at the same time might
 get lost.
 
 Usage:
-    churz.py [-p PORT] [-d DATABASE]
+    churz.py [-l HOST] [-p PORT] [-d DATABASE]
     churz.py --help
     churz.py --version
 
 Options:
+    -l HOST      Host to listen on [default: localhost].
     -p PORT      Port number [default: 9393].
     -d DATABASE  Database file, will be created if missing [default: data.db].
 
@@ -63,4 +64,4 @@ if __name__ == '__main__':
             db = json.load(f)
     except FileNotFoundError:
         db = {}
-    run(host='localhost', port=port)
+    run(host=args.get('-l', 'localhost'), port=port)
