@@ -56,6 +56,13 @@ If you think a parametrizable unit file (think ``churz@-var-www-churz.service``)
 would make sense, please open an issue on GitHub.
 
 
+Dockerfile
+----------
+
+The provided Dockerfile starts the service on port ``9393``. The user's uid is
+``14327`` and the data is on a volume mounted to ``/var/data``.
+
+
 License
 -------
 
